@@ -5,19 +5,28 @@
  Escreva outra função que exiba a frase descriptografada.
 */
 
+/* Programa que faz uma simples crpitografia de um texto e a seguir descriptografa o mesmo,
+   a criptografia é feita onde cada letra do texto digitado recebe a letra na posição que a constante "FATOR" tem seu valor.
+   Ou seja casa seja a letra 'a' e o "FATOR" definido com valor 3. A  Resposta criptografada desta letra será 'd'.
+*/
+
 #include <stdio.h>
 #include <ncurses.h>
 void cripto(char*,int);
+void descripto(char*,int);
+
+/*Define o valor do fator */
+#define FATOR 3
+
 int main(void)
 {
     char str[100];
-    int n;
+    
 
     printf("\nDigite o texto : ");
     scanf("%s", str);
-    printf("\nDigite um valor : ");
-    scanf("%d", &n);
-    cripto(&str[0],n);
+   
+    cripto(&str[0],FATOR);
 
     return 0;
 }
@@ -26,7 +35,7 @@ int main(void)
     
  void cripto(char*str,int n)  
  { 
-    char *teste, *reset, aux,crip[100];
+    char *teste, aux,crip[100];
     int i = 0, k = 0, cont = 0; 
     teste = &str[0];
     while (*teste != '\0' || *teste == '\0')
@@ -68,6 +77,8 @@ int main(void)
     teste = &crip[0];
     cont=1;
      k=0;
+     printf("\n--------------------------------------------\n");
+     printf("\nMensagem criptografada : ");
      while(*teste != '\0')
      {
         printf("%c",crip[k]);
@@ -92,24 +103,17 @@ int main(void)
             }
         }
      }
-
+    printf("\n--------------------------------------------\n");
+    descripto(&crip[0],n);
 
  }
 
 
-
-
-
-
-
-
-
-
-    /*
-    reset = &str[0];
-
-    teste = reset;
-    
+void descripto(char*crip,int n)
+{
+    char *teste, aux;
+    int i = 0, k = 0, cont = 0; 
+    teste=&crip[0];
     while (*teste != '\0' || *teste == '\0')
     {
         if (*teste == '\0')
@@ -119,31 +123,46 @@ int main(void)
         }
         else
         {
-            
-            aux = teste;
-            for (i = 0 ; i <= n; i++)
-            {
-                if (str[cont] == '\0')
-                {
-                    aux = reset;
-                    cont=0;
-                    crip[k]=*aux;
-                    cont++;
-                    aux++;
+                aux=*teste;
+               
+                if ( (aux-n) < 'a')
+                {   
+                    for(i=1; i<=n ; i++)
+                    {
+                        aux--;
+                        if(aux < 'a')
+                        {
+                            aux='z';
+                        }
+                        crip[cont]=aux;
+
+                    }
+                  
                 }
                 else
                 {
-                    crip[k] = *aux;
-                    aux++;
-                    cont++;
+                    crip[cont]=(aux-n);
                 }
-            }
-            cont=k;
-            k++;
-            teste++;
+            
+            
         }
+        cont++;
+        k++;
+        teste++;
     }
-    teste = reset;
-
-    printf("\n\n%c\n\n", crip[0]);
-*/
+    teste = &crip[0];
+    
+     k=0;
+     printf("\n--------------------------------------------\n");
+     printf("\nMensagem descriptografada: ");
+     
+     while(*teste != '\0')
+     {
+        printf("%c",crip[k]);
+        
+        k++;
+        teste++;
+    
+     }
+     printf("\n--------------------------------------------\n");
+}
