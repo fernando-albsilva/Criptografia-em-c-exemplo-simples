@@ -1,18 +1,15 @@
-/* Escreva uma função que receba como parâmetro um texto e um valor N e faz a criptografia do mesmo usando a seguinte regra.
- Para cada letra do texto,
-  de acordo com sua posição em cada vetor atribua a ela a letra que estiver N posições depois do mesmo vetor.
-   Imprima a frase criptografada na tela. Ela deve ser exibida em grupos de 5 letras. O último grupo deve ser completado com zeros ao final se contiver menos de 5 letras.
- Escreva outra função que exiba a frase descriptografada.
-*/
 
-/* Programa que faz uma simples crpitografia de um texto e a seguir descriptografa o mesmo,
+/* Programa que faz uma simples crpitografia de uma palavra e a seguir descriptografa a mesma,
    a criptografia é feita onde cada letra do texto digitado recebe a letra na posição que a constante "FATOR" tem seu valor.
-   Ou seja casa seja a letra 'a' e o "FATOR" definido com valor 3. A  Resposta criptografada desta letra será 'd'.
+   Ou seja casa seja a letra 'a' e o "FATOR" definido com valor 3. A  Resposta criptografada desta letra será 'd',
+   e a mesma será impressa criptografada em grupos de 5 letras e o que faltar sera completado com 0.
 */
 
 #include <stdio.h>
 #include <ncurses.h>
+/*efetua a criptografia*/
 void cripto(char*,int);
+/*efetua a descriptografia, revelando a mensagem original*/
 void descripto(char*,int);
 
 /*Define o valor do fator */
@@ -23,7 +20,7 @@ int main(void)
     char str[100];
     
 
-    printf("\nDigite o texto : ");
+    printf("\nDigite a palavra : ");
     scanf("%s", str);
    
     cripto(&str[0],FATOR);
